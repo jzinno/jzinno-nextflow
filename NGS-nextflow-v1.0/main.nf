@@ -125,7 +125,7 @@ process picard {
 
 
 
-    java -Xmx44g -jar $PICARD_JAR SortSam \
+    java -Xmx44g -jar /share/apps/picard/2.23.8/picard.jar SortSam \
         INPUT=${sam_bam[1]} \
         OUTPUT=${pair_id}_sorted.bam \
         SORT_ORDER=coordinate \
