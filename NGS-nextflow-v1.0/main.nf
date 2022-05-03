@@ -3,7 +3,7 @@ println "And we're off!..."
 
 
 
-//importing refrence sequence from params,, this is not really needed beacuse you can just reference params.ref but I kept it
+//importing refrence sequence from params, this is not really needed beacuse you can just reference params.ref but I kept it
 ref = file(params.ref)
 
 
