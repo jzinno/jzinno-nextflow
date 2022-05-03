@@ -1,11 +1,9 @@
-// Declare syntax version
-//nextflow.enable.dsl=2
-
+//Begin Workflow
 println "And we're off!..."
 
 
 
-
+//importing refrence sequence from params,, this is not really needed beacuse you can just reference params.ref but I kept it
 ref = file(params.ref)
 
 
