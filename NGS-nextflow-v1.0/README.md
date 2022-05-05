@@ -1,5 +1,5 @@
 # John Zinno 
-## NGS Final - Nextflow
+## NGS Final - Nextflow (Submitted 5/5/2022)
 
 ### **Basic running of the pipeline**
 
