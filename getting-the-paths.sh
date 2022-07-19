@@ -1,0 +1,1 @@
+for i in {001..048}; do find $PWD -name G-BMS$i*.fastq.gz -type f -printf '%p\t' | sed 's/\t$/\n/'; done >> ~/test-paths.txt

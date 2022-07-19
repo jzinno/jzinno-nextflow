@@ -12,6 +12,9 @@
 
 module purge
 
+
+module load singularity/3.1
+module load squashfs-tools/4.3
 module load nextflow/21.04.3
 
 nextflow main.nf -with-report report-nextflow-log.html -with-dag flowchart.html -with-timeline timeline.html -resume
