@@ -35,9 +35,9 @@ process fastp {
     """
     #!/bin/bash 
     module purge
-    module load fastp/intel/0.20.1 
+    
 
-    fastp \
+    /gpfs/home/jpz239/fastp \
     -i ${read1} \
     -I ${read2} \
     -o ${pair_id}_1.fastp.fastq.gz \
@@ -46,6 +46,7 @@ process fastp {
     -j ${pair_id}.fastp.json \
     --length_required 76 \
     --n_base_limit 50 \
+    --dedup \
     --detect_adapter_for_pe
     """
 }
@@ -68,7 +69,7 @@ process fastqc {
     """
     #!/bin/bash
     module purge
-    module load fastqc/0.11.9
+    module load fastqc/0.11.7
 
     fastqc ${reads[0]} ${reads[1]}
     """
@@ -87,8 +88,8 @@ process bwamem {
     """
     #!/bin/bash
     module purge
-    module load bwa/intel/0.7.17
-    module load samtools/intel/1.14
+    module load bwa/0.7.17
+    module load samtools/1.14
 
 
 
@@ -118,12 +119,12 @@ process picard {
     """
     #!/bin/bash
     module purge
-    module load picard/2.23.8
-    module load samtools/intel/1.14
+    module load picard/2.18.11
+    module load samtools/1.14
 
 
 
-    java -Xmx44g -jar /share/apps/picard/2.23.8/picard.jar SortSam \
+    java -Xmx44g -jar /gpfs/share/apps/picard/2.18.11/libs/picard.jar SortSam \
         INPUT=${sam_bam[1]} \
         OUTPUT=${pair_id}_sorted.bam \
         SORT_ORDER=coordinate \
