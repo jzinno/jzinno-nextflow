@@ -22,6 +22,8 @@ Channel
 
 //run fastp 
 process fastp {
+    errorStrategy 'retry'
+    maxRetries 3
     publishDir "${params.out}/trimmed_reads", mode:'copy'
 
     input:
