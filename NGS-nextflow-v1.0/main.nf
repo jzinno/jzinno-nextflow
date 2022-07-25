@@ -14,7 +14,6 @@ Channel
      .fromPath( params.table )
      .splitCsv(header: ['pair_id', 'read1', 'read2'], sep:'\t')
      .map{ row-> tuple(row.pair_id, file("${params.datadir}" + row.read1), file("${params.datadir}" + row.read2)) }
-     .take( 3 )
      .set { read_pairs_ch }
 
 
