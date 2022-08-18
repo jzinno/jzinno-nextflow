@@ -133,3 +133,60 @@ process picard {
     samtools index ${pair_id}_sorted.bam
     """
 }
+
+
+//run bqsr report
+process bqsr_report {
+    publishDir "${params.out}/bqsr_reports", mode:'copy'
+
+    input:
+    set pair_id, file(bam) from sorted_ch
+
+    output:
+    set val(pair_id), file("${bam}"), file("${pair_id}_bqsr.report") into bqsr_reports_ch
+
+    script:
+    """
+    #!/bin/bash
+    module purge
+
+    module load gatk/4.2.1.0
+
+
+    gatk --java-options "-Xmx4g" BaseRecalibrator  \
+        -I ${bam} \
+        -R ${ref} \
+        -O ${pair_id}_bqsr.report
+
+    """
+}
+
+//run bqsr apply
+process bqsr_apply {
+    publishDir "${params.out}/bqsr_bams", mode:'copy'
+
+    input:
+    set pair_id, file(bam), file(report) from bqsr_reports_ch
+
+    output:
+    set val(pair_id), file("${pair_id}_bqsr.bam"), file("${pair_id}_bqsr.bam.bai") into prepped_bams_ch
+
+    script:
+    """
+    #!/bin/bash
+    module purge
+
+    module load gatk/4.2.1.0
+    module load samtools/1.14
+
+    gatk --java-options "-Xmx4g" ApplyBQSR \
+        -I ${bam} \
+        -R ${ref} \
+        --bqsr-recal-file ${report} \
+        -O ${pair_id}_bqsr.bam
+
+
+    samtools index ${pair_id}_bqsr.bam
+    
+    """
+}
