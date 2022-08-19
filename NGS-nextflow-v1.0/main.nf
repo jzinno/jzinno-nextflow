@@ -157,7 +157,7 @@ process bqsr_report {
         -I ${bam} \
         -R ${ref} \
         --known-sites /gpfs/data/kirchhofflab/Resources/hg38/gatk_bundle/dbsnp_146.hg38.vcf.gz \
-        --known-sites /gpfs/data/kirchhofflab/Resources/hg38/gatk_bundle/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
+        --known-sites /gpfs/data/kirchhofflab/Resources/hg38/gatk_bundle/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz \
         -O ${pair_id}_bqsr.report
 
     """
