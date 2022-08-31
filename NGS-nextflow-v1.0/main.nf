@@ -95,7 +95,7 @@ process bwamem {
     bwa mem \
     -M \
     -t 8 \
-    -R "@RG\tID:${pair_id}\tPL:ILLUMINA\tSM:${pair_id}" \
+    -R "@RG\\tID:${pair_id}\\tPL:ILLUMINA\\tSM:${pair_id}" \
     ${ref} \
     ${reads[0]} \
     ${reads[1]} > ${pair_id}.sam
