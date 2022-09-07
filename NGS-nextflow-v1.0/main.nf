@@ -210,7 +210,6 @@ process  haplotype_caller {
     module purge
 
     module load gatk/4.2.1.0
-    module load bcftools/1.13
     
     gatk --java-options "-Xmx10g" HaplotypeCaller  \
       -R ${ref} \
@@ -219,7 +218,7 @@ process  haplotype_caller {
       -ERC GVCF
 
 
-    bcftools index ${pair_id}.g.vcf.gz
+    gatk IndexFeatureFile -I ${pair_id}.g.vcf.gz
 
     """
 }
