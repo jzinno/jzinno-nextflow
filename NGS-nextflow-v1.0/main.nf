@@ -199,10 +199,10 @@ process  haplotype_caller {
     publishDir "${params.out}/gVCFs", mode:'copy'
 
     input:
-    set pair_id, file(bam) from prepped_bams_ch
+    set pair_id, file(bam), file(index) from prepped_bams_ch
 
     output:
-    set val(pair_id), file("${pair_id}.g.vcf.gz") into gvcf_ch
+    set val(pair_id), file("${pair_id}.g.vcf.gz"), file("${pair_id}.g.vcf.gz.tbi") into gvcf_ch
 
     script:
     """
@@ -210,12 +210,16 @@ process  haplotype_caller {
     module purge
 
     module load gatk/4.2.1.0
+    module load bcftools/1.13
     
     gatk --java-options "-Xmx10g" HaplotypeCaller  \
       -R ${ref} \
       -I ${bam} \
       -O ${pair_id}.g.vcf.gz \
       -ERC GVCF
+
+
+    bcftools index ${pair_id}.g.vcf.gz
 
     """
 }
