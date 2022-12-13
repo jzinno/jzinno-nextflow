@@ -6,7 +6,6 @@
 #SBATCH --mem=2GB
 #SBATCH --job-name=nextflow
 #SBATCH --mail-type=FAIL,END
-#SBATCH --mail-user=jpz239@nyu.edu
 #SBATCH --output=nextflow-log_%j.out
 
 
